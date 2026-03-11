@@ -28,6 +28,53 @@ function getAvailableTeams(bookings, date, slot) {
   });
 }
 
+function AddonIcon({ slug }) {
+  const commonProps = {
+    className: "h-5 w-5",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.7"
+  };
+
+  switch (slug) {
+    case "oven-cleaning":
+      return (
+        <svg viewBox="0 0 24 24" {...commonProps}>
+          <rect x="4" y="5" width="16" height="14" rx="2" />
+          <path d="M7 9h10" />
+          <path d="M8 13h8v4H8z" />
+        </svg>
+      );
+    case "fridge-cleaning":
+      return (
+        <svg viewBox="0 0 24 24" {...commonProps}>
+          <rect x="7" y="3.5" width="10" height="17" rx="2" />
+          <path d="M7 11.5h10" />
+          <path d="M15 7v2" />
+          <path d="M15 14v2" />
+        </svg>
+      );
+    case "interior-windows":
+      return (
+        <svg viewBox="0 0 24 24" {...commonProps}>
+          <rect x="4" y="4" width="16" height="16" rx="2" />
+          <path d="M12 4v16" />
+          <path d="M4 12h16" />
+        </svg>
+      );
+    case "pet-hair-removal":
+      return (
+        <svg viewBox="0 0 24 24" {...commonProps}>
+          <path d="M12 19c3.2 0 5.5-1.7 5.5-4 0-1.7-1.2-2.8-3-3.3-.8-.2-1.6-.2-2.5-.2s-1.7 0-2.5.2c-1.8.5-3 1.6-3 3.3 0 2.3 2.3 4 5.5 4z" />
+          <path d="M8 9.5c.9 0 1.5-.9 1.5-2s-.6-2-1.5-2-1.5.9-1.5 2 .6 2 1.5 2z" />
+          <path d="M16 9.5c.9 0 1.5-.9 1.5-2s-.6-2-1.5-2-1.5.9-1.5 2 .6 2 1.5 2z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 export function BookingPage() {
   const [bookings, setBookings] = useState(initialBookings);
   const [form, setForm] = useState({
@@ -289,11 +336,18 @@ export function BookingPage() {
                           : "border-slate-200 bg-white hover:border-brand-200 hover:bg-slate-50"
                       }`}
                     >
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="font-medium text-slate-900">{addon.name}</div>
-                        <div className="text-sm text-slate-500">{addon.turnaround}</div>
+                      <div className="flex items-start gap-3">
+                        <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-700">
+                          <AddonIcon slug={addon.slug} />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="font-medium text-slate-900">{addon.name}</div>
+                            <div className="text-sm text-slate-500">{addon.turnaround}</div>
+                          </div>
+                          <div className="mt-2 text-sm text-slate-600">+{formatCurrency(addon.price)}</div>
+                        </div>
                       </div>
-                      <div className="mt-2 text-sm text-slate-600">+{formatCurrency(addon.price)}</div>
                     </button>
                   );
                 })}

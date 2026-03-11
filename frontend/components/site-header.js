@@ -5,7 +5,7 @@ import { useState } from "react";
 import { servicePages } from "@/components/service-data";
 
 const navItems = [
-  { href: "/#home", label: "Home" },
+  { href: "/", label: "Home" },
   { href: "/faqs", label: "FAQs" }
 ];
 
@@ -24,7 +24,7 @@ export function SiteHeader() {
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-3 text-[#243128]" onClick={closeMenu}>
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#6f8a67] text-sm font-semibold text-white">
-              WC
+              PC
             </span>
             <div>
               <div className="text-lg font-semibold leading-none">Premier Cleaning Co.</div>
@@ -36,6 +36,10 @@ export function SiteHeader() {
 
           <div className="hidden items-center gap-8 sm:flex">
             <nav className="flex items-center gap-6 text-sm font-medium text-[#5f6c61]">
+              <Link href="/" className="transition hover:text-[#4c6247]">
+                Home
+              </Link>
+
               <div className="group relative">
                 <button type="button" className="flex items-center gap-1 transition hover:text-[#4c6247] focus:outline-none">
                   <span>Services</span>
@@ -56,7 +60,7 @@ export function SiteHeader() {
                 </div>
               </div>
 
-              {navItems.map((item) => (
+              {navItems.slice(1).map((item) => (
                 <Link key={item.href} href={item.href} className="transition hover:text-[#4c6247]">
                   {item.label}
                 </Link>
@@ -95,6 +99,14 @@ export function SiteHeader() {
         {menuOpen ? (
           <div className="mt-4 border-t border-[#ece4d6] pt-4 sm:hidden">
             <nav className="flex flex-col gap-2 text-sm font-medium text-[#5f6c61]">
+              <Link
+                href="/"
+                onClick={closeMenu}
+                className="rounded-xl px-3 py-3 transition hover:bg-[#f7f3ea] hover:text-[#4c6247]"
+              >
+                Home
+              </Link>
+
               <button
                 type="button"
                 onClick={() => setServicesOpen((current) => !current)}
@@ -119,7 +131,7 @@ export function SiteHeader() {
                 </div>
               ) : null}
 
-              {navItems.map((item) => (
+              {navItems.slice(1).map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
