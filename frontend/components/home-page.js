@@ -82,11 +82,6 @@ export function HomePage() {
                 </div>
               ))}
             </div>
-            <div className="mt-8">
-              <Link href="/booking" className="rounded-full bg-brand-600 px-7 py-3 text-sm font-semibold text-white transition hover:bg-brand-700">
-                Book Now
-              </Link>
-            </div>
           </div>
         </div>
       </section>
